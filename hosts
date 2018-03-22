@@ -1,0 +1,5 @@
+[prod]
+1.1.1.1
+[prod:vars]
+ansible_python_interpreter=/usr/bin/python2.7
+

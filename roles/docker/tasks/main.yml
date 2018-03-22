@@ -1,0 +1,31 @@
+---
+- name: Update apt
+  raw: apt-get update -qq
+
+- name: Install python 2.7
+  raw: apt-get install -qq python2.7
+
+- name: Install packages to allow apt to use a repository over HTTPS
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - build-essential
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Docker’s official GPG key
+  raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+- name: Set up the stable repository
+  raw: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"
+
+- name: Update apt
+  raw: apt-get update
+
+- name: Install docker
+  apt: pkg=docker-ce state=latest update_cache=true
+
+- name: ensure docker registry is available
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-xenial main' state=present
+
+- service: name=docker state=restarted

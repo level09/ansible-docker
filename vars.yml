@@ -1,0 +1,13 @@
+---
+#hostname
+server_hostname: enferno.com
+#user of the server
+user_name: enferno
+#Password for the server user, currently: enferno, example: 
+# python -c 'import crypt; print crypt.crypt("enferno", "$trong$@lt")'
+password: KJqBrYZ4Hvqdk
+#project root will be  /home/{{user_name}}/{{server_hostname}} by convention 
+
+enferno_port: 5000
+#put your enferno App git repository here
+git_repo: http://github.com/level09/enferno-sql.git
